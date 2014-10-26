@@ -20,6 +20,16 @@ var (
 	innerPath       = "app/src/main/res"
 )
 
+func isExist(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
+}
+
+func isDir(path string) bool {
+	stat, err := os.Stat(path)
+	return err == nil && stat.IsDir()
+}
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "converticon"
@@ -42,9 +52,19 @@ func main() {
 		if projectPath == "" {
 			projectPath, _ = os.Getwd()
 		}
+		if ok := isExist(projectPath); !ok {
+			log.Fatalf("not found: %s", projectPath)
+		}
+
 		imagePath := c.String("image")
 		if imagePath == "" {
 			imagePath = androidLauncher
+		}
+		if ok := isDir(imagePath); ok {
+			imagePath = filepath.Join(imagePath, androidLauncher)
+		}
+		if ok := isExist(imagePath); !ok {
+			log.Fatalf("not found: %s", imagePath)
 		}
 
 		for p, size := range iconSizes {
