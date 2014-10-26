@@ -10,6 +10,8 @@ command interface.
 $ converticon -p <project path> -i <image icon path>
 ```
 
+for example,
+
 ```shell
 $ converticon -p lifeticking -i lifeticking/icon.png
 generate /Users/satouhayabusa/git/github.com/satoshun/lifeticking/app/src/main/res/drawable-xhdpi/ic_launcher.png
