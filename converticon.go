@@ -68,15 +68,16 @@ func main() {
 		}
 
 		for p, size := range iconSizes {
-			dest := filepath.Join(projectPath, innerPath, p, androidLauncher)
-			if err := os.MkdirAll(dest, 0644); err != nil {
+			destDir := filepath.Join(projectPath, innerPath, p)
+			if err := os.MkdirAll(destDir, 0644); err != nil {
 				log.Fatal(err)
 			}
-			if err := resizeCmd(src, dest, size); err != nil {
+			destPath := filepath.Join(destDir, androidLauncher)
+			if err := resizeCmd(src, destPath, size); err != nil {
 				log.Fatal(err)
 			}
 
-			fmt.Printf("generate %s\n", dest)
+			fmt.Printf("generate %s\n", destPath)
 		}
 	}
 
