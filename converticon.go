@@ -69,7 +69,7 @@ func main() {
 
 		for p, size := range iconSizes {
 			destDir := filepath.Join(projectPath, innerPath, p)
-			if err := os.MkdirAll(destDir, 0644); err != nil {
+			if err := os.MkdirAll(destDir, 0755); err != nil {
 				log.Fatal(err)
 			}
 			destPath := filepath.Join(destDir, androidLauncher)
