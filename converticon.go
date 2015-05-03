@@ -56,24 +56,27 @@ func main() {
 			log.Fatalf("not found: %s", projectPath)
 		}
 
-		imagePath := c.String("image")
-		if imagePath == "" {
-			imagePath = androidLauncher
+		src := c.String("image")
+		if src == "" {
+			src = androidLauncher
 		}
-		if ok := isDir(imagePath); ok {
-			imagePath = filepath.Join(imagePath, androidLauncher)
+		if ok := isDir(src); ok {
+			src = filepath.Join(src, androidLauncher)
 		}
-		if ok := isExist(imagePath); !ok {
-			log.Fatalf("not found: %s", imagePath)
+		if ok := isExist(src); !ok {
+			log.Fatalf("not found: %s", src)
 		}
 
 		for p, size := range iconSizes {
-			path := filepath.Join(projectPath, innerPath, p, androidLauncher)
-			err := resizeCmd(imagePath, path, size)
-			if err != nil {
+			dest := filepath.Join(projectPath, innerPath, p, androidLauncher)
+			if err := os.MkdirAll(dest, 0644); err != nil {
 				log.Fatal(err)
 			}
-			fmt.Printf("generate %s\n", path)
+			if err := resizeCmd(src, dest, size); err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Printf("generate %s\n", dest)
 		}
 	}
 
