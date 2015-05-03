@@ -33,7 +33,7 @@ func isDir(path string) bool {
 func main() {
 	app := cli.NewApp()
 	app.Name = "converticon"
-	app.Version = "0.2"
+	app.Version = "0.3"
 	app.Usage = "convert android icon sizes for playstore"
 
 	app.Flags = []cli.Flag{
