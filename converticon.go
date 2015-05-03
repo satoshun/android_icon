@@ -12,9 +12,13 @@ import (
 var (
 	iconSizes = map[string]int{
 		"drawable-xxhdpi": 144,
+		"mipmap-xxhdpi":   144,
 		"drawable-xhdpi":  96,
+		"mipmap-xhdpi":    96,
 		"drawable-hdpi":   72,
+		"mipmap-hdpi":     72,
 		"drawable-mdpi":   48,
+		"mipmap-mdpi":     48,
 	}
 	androidLauncher = "ic_launcher.png"
 	innerPath       = "app/src/main/res"
